@@ -7,7 +7,7 @@ var path = require( 'path' );
 var nunjucks = require( 'nunjucks' );
 var dss = require( 'dss' );
 
-var pjson = require( './package.json' );
+var pjson = require( '../../package.json' );
 
 function timeStamp() {
     var now = new Date();
