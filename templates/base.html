@@ -1,44 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Fluid Style Guide</title>
-    <link rel="stylesheet" href="./css/fluid/application.css" />
-    <link rel="stylesheet" href="./css/outbound_trailers/application.css" />
-    <style>
-      html body { padding: 0; }
-      p {
-        margin: 10px 0;
-        font-size: 16px;
-      }
-      code {
-        background-color: #eee;
-        font-family: monospace;
-      }
-      .example {
-        padding: 10px;
-        margin-top: 10px;
-        border: 1px solid #ddd;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-      }
-      pre {
-        background-color: #eee;
-        font-family: monospace;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ddd;
-        border-top: none;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-      }
-    </style>
-  </head>
+<head>
+    <title>Virtucon Core UI | Style Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="//use.typekit.net/poh0yoj.js"></script>
+    <script>try {
+        Typekit.load();
+    } catch( e ) {
+    }</script>
+    <link rel="stylesheet" href="css/styles.min.css"/>
+    <!-- Syntax highlighting -->
+    <script src="../node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
 
-  <body>
-    <div id="content" class="container-fluid">
-      <h1>Fluid CSS</h1>
+<body>
 
-      {{ content }}
+<section class="hero">
+    <div class="content">
+        <div class="header">
+            <h1>Virtucon Core UI</h1>
+
+            <p>Browse styles below and copy code for UI elements and components to use in your pages.</p>
+
+            <p>version {{ version }}, build {{ build }}</p>
+        </div>
     </div>
-  </body>
+</section>
+
+{{ content }}
+
+</body>
 </html>

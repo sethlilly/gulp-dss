@@ -1,26 +1,28 @@
-<div class="pageSection">
-  <h2 class="sectionHeader sectionHeader-bordered">{{ name }}</h2>
+<section class="element">
+    <div class="header">
+        <h2>{{ name }}</h2>
 
-  <p>{{ description }}</p>
-
-  <div>
-    <h3>States</h3>
-
-    <ul>
-      {% for s in state %}
-        <li><code>{{ s.name }}</code> - {{ s.description }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-
-  <div>
-    <h3>Example</h3>
-
-    <div class="example">
-      {{ markup.example | safe }}
+        <p>{{ description }}</p>
     </div>
-    <pre>
-{{ markup.escaped }}
-    </pre>
-  </div>
-</div>
+
+
+    <section>
+        {% if state %}
+        <label class="demo"><span>States</span></label>
+        <ul>
+            {% for s in state %}
+            <li><code>{{ s.name }}</code> - {{ s.description }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <label class="demo"><span>Example</span></label>
+
+        <div>
+            {{ markup.example | safe }}
+        </div>
+        <label class="demo"><span>Usage</span></label>
+        <code>
+            {{ markup.escaped }}
+        </code>
+    </section>
+</section>
