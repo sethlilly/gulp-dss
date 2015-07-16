@@ -1,16 +1,16 @@
 'use strict';
 
-var through = require( 'through' );
-var Buffer = require( 'buffer' ).Buffer;
-var File = require( 'gulp-util' ).File;
-var path = require( 'path' );
+var through  = require( 'through' );
+var Buffer   = require( 'buffer' ).Buffer;
+var File     = require( 'gulp-util' ).File;
+var path     = require( 'path' );
 var nunjucks = require( 'nunjucks' );
-var dss = require( 'dss' );
+var dss      = require( 'dss' );
 
 //var pjson = require( '../package.json' );
 
 function timeStamp() {
-    var now = new Date();
+    var now  = new Date();
     var date = [ now.getFullYear(), now.getMonth() + 1, now.getDate() ];
     var time = [ now.getHours(), now.getMinutes(), now.getSeconds() ];
     for( var i = 0; i < 3; i++ ) {
@@ -30,7 +30,7 @@ function plugin( opts ) {
     if( opts === undefined ) throw new Error( 'Missing options' );
 
     var firstFile = null;
-    var contents = null;
+    var contents  = null;
 
     nunjucks.configure( opts.templatePath || path.join( __dirname, 'templates' ) );
 
@@ -39,7 +39,7 @@ function plugin( opts ) {
 
         dss.parse( file.contents.toString(), parseOptions, function( dssFile ) {
             firstFile = firstFile || file;
-            contents = contents || [];
+            contents  = contents || [];
 
             if( isBlank( dssFile ) ) return;
 
