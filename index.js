@@ -7,7 +7,7 @@ var path = require( 'path' );
 var nunjucks = require( 'nunjucks' );
 var dss = require( 'dss' );
 
-var pjson = require( '../package.json' );
+//var pjson = require( '../package.json' );
 
 function timeStamp() {
     var now = new Date();
@@ -75,7 +75,8 @@ function plugin( opts ) {
     }
 
     function wrapContents( content ) {
-        return render( 'base.html', { content: content, version: pjson.version, build: timeStamp() } );
+        //return render( 'base.html', { content: content, version: pjson.version, build: timeStamp() } );
+        return render( 'base.html', { content: content } );
     }
 
     return through( process, endStream );
