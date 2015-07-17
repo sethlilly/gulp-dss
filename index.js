@@ -1,3 +1,5 @@
+'use strict';
+
 var Buffer      = require( 'buffer' ).Buffer,
     dss         = require( 'dss' ),
     gutil       = require( 'gulp-util' ),
@@ -5,17 +7,14 @@ var Buffer      = require( 'buffer' ).Buffer,
     path        = require( 'path' ),
     PluginError = gutil.PluginError,
     nunjucks    = require( 'nunjucks' ),
-    through     = require( 'through2' );
-
-const PLUGIN_NAME = 'gulp-dss';
+    through     = require( 'through2' ),
+    PLUGIN_NAME = 'gulp-dss';
 
 function plugin( opts ) {
 
     if( opts === undefined ) {
         throw new PluginError( PLUGIN_NAME, 'Missing options.' );
     }
-
-    // Should have opts.version here
 
     var firstFile = null;
     var contents  = null;
@@ -49,6 +48,7 @@ function plugin( opts ) {
     }
 
     function endStream( cb ) {
+
         if( firstFile ) {
             var joinedPath = path.join( firstFile.base, opts.output );
 
@@ -58,10 +58,11 @@ function plugin( opts ) {
                 path: joinedPath,
                 contents: new Buffer( wrapContents( contents.join( '\n' ), opts.version ) )
             } );
+
+            this.push( newFile );
         }
 
-        this.push( newFile );
-        cb();
+        cb( this.end() );
     }
 
     return through.obj( bufferContents, endStream );
