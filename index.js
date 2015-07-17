@@ -62,7 +62,8 @@ function plugin( opts ) {
             this.push( newFile );
         }
 
-        cb( this.end() );
+        cb();
+
     }
 
     return through.obj( bufferContents, endStream );
