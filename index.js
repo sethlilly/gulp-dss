@@ -72,7 +72,7 @@ function plugin( opts ) {
 
     function endStream() {
 
-        this.emit( 'end' );
+
     }
 
     function wrapContents( content ) {
@@ -80,7 +80,7 @@ function plugin( opts ) {
         return render( 'base.html', { content: content } );
     }
 
-    return through( process, endStream );
+    return through( process, this.emit( 'end' ) );
 }
 
 function render( templateName, context ) {
