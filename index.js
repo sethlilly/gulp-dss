@@ -1,11 +1,11 @@
 'use strict';
 
-var through  = require( 'through' );
-var Buffer   = require( 'buffer' ).Buffer;
-var File     = require( 'gulp-util' ).File;
-var path     = require( 'path' );
-var nunjucks = require( 'nunjucks' );
-var dss      = require( 'dss' );
+var Buffer   = require( 'buffer' ).Buffer,
+    dss      = require( 'dss' ),
+    File     = require( 'gulp-util' ).File,
+    path     = require( 'path' ),
+    nunjucks = require( 'nunjucks' ),
+    through  = require( 'through' );
 
 //var pjson = require( '../package.json' );
 
@@ -27,7 +27,7 @@ function timeStamp() {
 }
 
 function plugin( opts ) {
-    if( opts === undefined ) throw new Error( 'Missing options' );
+    if( opts === undefined ) throw new Error( 'Missing options.' );
 
     var firstFile = null;
     var contents  = null;
@@ -70,8 +70,8 @@ function plugin( opts ) {
 
             this.emit( 'data', newFile );
         }
-
         this.emit( 'end' );
+        this.emit( 'close' );
     }
 
     function wrapContents( content ) {
