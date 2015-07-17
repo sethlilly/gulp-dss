@@ -56,10 +56,8 @@ function plugin( opts ) {
                 cwd: firstFile.cwd,
                 base: firstFile.base,
                 path: joinedPath,
-                contents: new Buffer( wrapContents( contents.join( '\n' ) ) )
+                contents: new Buffer( wrapContents( contents.join( '\n' ), opts.version ) )
             } );
-
-            //this.emit( 'data', newFile );
         }
 
         this.push( newFile );
@@ -68,61 +66,14 @@ function plugin( opts ) {
 
     return through.obj( bufferContents, endStream );
 
-    /*return through.obj( function( file, enc, cb ) {
-
-     if( file.isBuffer() ) {
-     this.emit( 'error', new PluginError( PLUGIN_NAME, 'Buffers are not supported.' ) );
-     return cb();
-     }
-
-     var parseOptions = {};
-
-     dss.parse( file.contents.toString(), parseOptions, function( dssFile ) {
-     firstFile = firstFile || file;
-     contents  = contents || [];
-
-     if( isBlank( dssFile ) ) return;
-
-     dssFile.blocks.filter( validBlock ).forEach( function( block ) {
-     contents.push( render( 'module.html', block ) );
-     } );
-
-     function isBlank( dssFile ) {
-     return dssFile.blocks.length === 0;
-     }
-
-     function validBlock( block ) {
-     return block.name !== undefined;
-     }
-     } );
-
-     if( firstFile ) {
-     var joinedPath = path.join( firstFile.base, opts.output );
-
-     var newFile = new File( {
-     cwd: firstFile.cwd,
-     base: firstFile.base,
-     path: joinedPath,
-     contents: new Buffer( wrapContents( contents.join( '\n' ) ) )
-     } );
-
-     this.emit( 'data', newFile );
-     }
-
-     // Send the file to the next gulp plugin
-     this.push( file );
-
-     cb();
-     } );*/
 }
 
 function render( templateName, context ) {
     return nunjucks.render( templateName, context );
 }
 
-function wrapContents( content ) {
-    //return render( 'base.html', { content: content, version: pjson.version, build: timeStamp() } );
-    return render( 'base.html', { content: content } );
+function wrapContents( content, version ) {
+    return render( 'base.html', { content: content, version: version, build: timeStamp() } );
 }
 
 function timeStamp() {
