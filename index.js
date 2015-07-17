@@ -34,7 +34,7 @@ function plugin( opts ) {
 
     nunjucks.configure( opts.templatePath || path.join( __dirname, 'templates' ) );
 
-    function process( file ) {
+    return through( function process( file ) {
         var parseOptions = {};
 
         dss.parse( file.contents.toString(), parseOptions, function( dssFile ) {
@@ -55,7 +55,7 @@ function plugin( opts ) {
                 return block.name !== undefined;
             }
         } );
-        
+
         if( firstFile ) {
             var joinedPath = path.join( firstFile.base, opts.output );
 
@@ -68,23 +68,18 @@ function plugin( opts ) {
 
             this.emit( 'data', newFile );
         }
-    }
-
-    function endStream() {
-
-
-    }
-
-    function wrapContents( content ) {
-        //return render( 'base.html', { content: content, version: pjson.version, build: timeStamp() } );
-        return render( 'base.html', { content: content } );
-    }
-
-    return through( process, this.emit( 'end' ) );
+    }, function endStream() {
+        this.emit( 'end' );
+    } );
 }
 
 function render( templateName, context ) {
     return nunjucks.render( templateName, context );
+}
+
+function wrapContents( content ) {
+    //return render( 'base.html', { content: content, version: pjson.version, build: timeStamp() } );
+    return render( 'base.html', { content: content } );
 }
 
 module.exports = plugin;
