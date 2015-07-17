@@ -55,9 +55,7 @@ function plugin( opts ) {
                 return block.name !== undefined;
             }
         } );
-    }
-
-    function endStream() {
+        
         if( firstFile ) {
             var joinedPath = path.join( firstFile.base, opts.output );
 
@@ -70,8 +68,11 @@ function plugin( opts ) {
 
             this.emit( 'data', newFile );
         }
+    }
+
+    function endStream() {
+
         this.emit( 'end' );
-        this.emit( 'close' );
     }
 
     function wrapContents( content ) {
